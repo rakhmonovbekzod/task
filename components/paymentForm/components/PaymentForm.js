@@ -10,6 +10,8 @@ import { paymentAction } from '../../../redux/slices/payment/action';
 import { useDispatch, useSelector } from 'react-redux';
 import Alert from 'react-bootstrap/Alert';
 import Modal from '../../Modal';
+import { clearStore } from '../../../redux/slices/payment/reducer';
+
 
 
 const PaymentForm = () => {
@@ -30,6 +32,7 @@ const PaymentForm = () => {
 
     const closeModal = () => {
         setShowModal(false)
+       dispatch(clearStore())
     }
 
     const onSubmit = async (values) => {
@@ -82,7 +85,7 @@ const PaymentForm = () => {
                     resetForm()
                 }}
             >
-                {({  }) => {
+                {({ isSubmitting }) => {
                    
                     return (
                         <>
@@ -91,11 +94,21 @@ const PaymentForm = () => {
                             }
                             <Modal show={showModal} handleClose={closeModal}>
                                 {
-                                    result?.map((item, index) => (
-                                           <Alert key={index} variant='success'>
-                                              {resultKeys[index]}:{item[resultKeys[index]]}
-                                           </Alert>
-                                    ))
+                                  result?.length ? (
+                                    <>
+                                        {
+                                             result?.map((item, index) => (
+                                                <Alert key={index} variant='success'>
+                                                   {resultKeys[index]}:{item[resultKeys[index]]}
+                                                </Alert>
+                                         ))
+                                        }
+                                    </>
+                                  ) : (
+                                        <Alert  variant='danger'>
+                                             You have error 
+                                        </Alert>
+                                    )
                                 }
                             </Modal>
                             <Form className='row pb-5 form'>
@@ -137,7 +150,7 @@ const PaymentForm = () => {
                                     </>
                                 }
                                 <div className="col-12 mt-4">
-                                    <Button className="btn-danger" text='submit' />
+                                    <Button disabled={isSubmitting} className="btn-danger" text='submit' />
                                 </div>
                             </Form>
                         </>

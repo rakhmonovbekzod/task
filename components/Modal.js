@@ -8,7 +8,7 @@ const MyModal = (props) => {
 
     return (
         <Modal
-           onHide={handleClose}
+            onHide={handleClose}
             show={show}
             contentLabel={title}
         >

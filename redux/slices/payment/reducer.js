@@ -11,6 +11,13 @@ const initialState = {
 export const paymentSlice = createSlice({
     name: 'paymentSlice',
     initialState,
+    reducers: {
+        clearStore(state, action) {
+            state.loading = false
+            state.isSuccess = false
+            state.result = null
+        },
+    },
     extraReducers: {
         [paymentAction.pending.type]: (state, action) => {
             state.loading = true
@@ -41,5 +48,6 @@ export const paymentSlice = createSlice({
     }
 })
 
+export const { clearStore } = paymentSlice.actions
 
 export default paymentSlice.reducer

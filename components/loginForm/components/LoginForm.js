@@ -38,7 +38,7 @@ const LoginForm = () => {
                 submitLogin(values)
             }}
         >
-            {({ values, setFieldValue }) => {
+            {({ isSubmitting }) => {
                 return (
                     <> {
                         loading ?  <Loader/> : ''
@@ -57,7 +57,7 @@ const LoginForm = () => {
                                     </div>
                                 ))
                             }
-                            <Button className="btn-danger" text="submit" />
+                            <Button  disabled={isSubmitting} className="btn-danger" text="submit" />
 
                         </Form>
                     </>
