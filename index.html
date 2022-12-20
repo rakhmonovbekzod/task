@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const obj = {
+            "jsonrpc": "string",
+            "id": 0,
+            "result": {
+                "additionalProp1": "string",
+                "additionalProp2": "string",
+                "additionalProp3": "string"
+            }
+        }
+  let arr = []
+       for (const key in obj) {
+        if (typeof obj[key] == 'object') {
+                  for (const prop in obj[key]) {
+                  arr.push({[prop]:obj[key][prop]})
+            }  
+        }else {
+            arr.push({[key]:obj[key]})
+        }
+
+        }
+     
+      console.log(arr);
+    </script>
+</body>
+
+</html>
